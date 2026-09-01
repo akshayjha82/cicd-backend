@@ -34,12 +34,13 @@ pipeline {
             }
         }
 
-//         stage('Deploy'){
-//         steps {
-//         bat 'docker rm -f cicd-container || exit 0'
-//         bat 'docker run  -d --name cicd-container -p 8081:8081 cicd-app'
-//         }
-//         }
+        stage('Deploy'){
+        steps {
+        bat 'docker stop cicd-container'
+        bat 'docker rm cicd-container'
+        bat 'docker run  -d --name cicd-container -p 8081:8081 cicd-app'
+         }
+        }
 
     }
 }
