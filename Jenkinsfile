@@ -33,6 +33,7 @@ pipeline {
 
         stage('Check Docker') {
             steps {
+                echo 'Checking docker connection'
                 bat 'docker --version'
             }
         }
