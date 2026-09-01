@@ -1,42 +1,45 @@
 pipeline {
+
     agent any
 
     stages {
 
         stage('Checkout') {
             steps {
-                echo 'Code Checkout Stage'
                 checkout scm
             }
         }
 
         stage('Compile') {
             steps {
-                echo 'Compiling Application'
                 bat 'mvn clean compile'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running Unit Tests'
                 bat 'mvn test'
             }
         }
 
         stage('Package') {
             steps {
-                echo 'Creating JAR'
                 bat 'mvn clean package'
             }
         }
 
-        stage('Check Docker') {
+        stage('Docker Build') {
             steps {
-                echo 'Checking docker connection'
-                bat 'docker --version'
+                bat 'docker build -t cicd-app .'
             }
         }
+
+//         stage('Deploy'){
+//         steps {
+//         bat 'docker rm -f cicd-container || exit 0'
+//         bat 'docker run  -d --name cicd-container -p 8081:8081 cicd-app'
+//         }
+//         }
 
     }
 }
