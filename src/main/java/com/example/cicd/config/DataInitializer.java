@@ -14,8 +14,8 @@ public class DataInitializer {
         return args -> {
 
             repo.save(new Product(null, "Laptop", 50000));
+            repo.save(new Product(null, "Asus", 78900));
             repo.save(new Product(null, "Phone", 30000));
-
         };
     }
 }
